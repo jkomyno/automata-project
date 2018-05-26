@@ -2,28 +2,32 @@ CXX=g++
 CXXFLAGS=-std=c++11 -I $(HOME)/antlr4/include
 LDFLAGS=-lantlr4-runtime -L $(HOME)/antlr4/lib
 DEPS=swlLexer.h swlParser.h
-TDEPS=swlBaseListener.h MyListener.h
+TDEPS=swlParserBaseListener.h MyListener.h
 OBJS=swlParser.o swlLexer.o
 SCOBJS=syncheck.o
 TOBJS=translate.o MyListener.o
-ANTLRS=swlBaseListener.h \
+ANTLRS=swlParserBaseListener.h \
         swlLexer.cpp \
         swlLexer.tokens \
         swlParser.cpp \
         swlLexer.h \
-        swlListener.cpp \
+        swlParserListener.cpp \
         swlParser.h \
-        swlBaseListener.cpp \
+        swlParserBaseListener.cpp \
         swl.interp \
         swlLexer.interp \
-        swlListener.h \
+        swlParserListener.h \
         swl.tokens
-GRAMMAR=swl.g4
+GRAMMAR_LEXER=swlLexer.g4
+GRAMMAR_PARSER=swlParser.g4
 
 all: cleanall grammar syncheck translate
 
+setup:
+	source ../setup.sh
+
 grammar:
-	antlr4 -Dlanguage=Cpp $(GRAMMAR)
+	antlr4 -Dlanguage=Cpp $(GRAMMAR_LEXER) $(GRAMMAR_PARSER)
 
 syncheck: $(SCOBJS) $(OBJS) $(DEPS)
 	$(CXX) -o syncheck $(SCOBJS) $(OBJS) $(LDFLAGS)
@@ -35,7 +39,7 @@ translate: $(TOBJS) $(OBJS) $(TDEPS) $(DEPS)
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 	
 clean:
-	rm -f $(OBJS) $(TOBJS) $(SCOBJS) syncheck translate
+	rm -f $(OBJS) $(TOBJS) $(SCOBJS) *.interp *.tokens syncheck translate
 
 distclean:
 	rm -f $(ANTLRS)

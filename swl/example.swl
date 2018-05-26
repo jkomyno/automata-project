@@ -18,10 +18,20 @@ begin
     end
     let d be 0
     input d
-    while (NOT 5) do
+    while not (5) do
         let c be 5
     end
-    while (true and 1) do
+    while true eq 1 do
         let c be 5
+    end
+    # it should also support comments
+    if a lte b and (true or false) do
+        sub 5 to b
+    elif true do
+        let d be 1
+    elif not (true) or (5 eq 5) do
+        print 4
+    else do
+        print 5
     end
 end

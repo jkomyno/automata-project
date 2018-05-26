@@ -1,0 +1,21 @@
+begin
+    let n be 0
+    input n
+    if n eq 0 do
+        print 0
+    elif n lte -1 do
+        print "ERROR"
+    else do
+        let prev be 0
+        let curr be 1
+        let i be 1
+        while i lt n do
+            let next be prev
+            add curr to next
+            prev be curr
+            curr be next
+            add 1 to i
+        end
+        print curr
+    end
+end

@@ -1,4 +1,11 @@
-// Generated from /home/jkomyno/antlr4/swl/swl.g4 by ANTLR 4.7.1
+// Generated from /home/jkomyno/antlr4/swl/swlParser.g4 by ANTLR 4.7.1
+
+/*
+ * Developed in May 2018 @UNIPD by:
+ * - Brian Federico
+ * - Schiabel Alberto
+ */
+
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -16,32 +23,41 @@ public class swlParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, BEGIN=5, END=6, WHILE=7, IF=8, THEN=9, 
-		ELSE=10, ELIF=11, VARIABLE=12, DEFINE=13, TO=14, DO=15, ADD=16, SUB=17, 
-		MUL=18, DIV=19, EQUAL=20, N_EQUAL=21, GT_EQUAL=22, LT_EQUAL=23, GT=24, 
-		LT=25, AND=26, OR=27, NOT=28, BOOL=29, ID=30, NUMBER=31, WS=32, ErrorChar=33;
+		BEGIN=1, END=2, INPUT=3, PRINT=4, WHILE=5, IF=6, THEN=7, ELSE=8, ELIF=9, 
+		VARIABLE=10, ASSIGN=11, TO=12, DO=13, ADD=14, SUB=15, MUL=16, DIV=17, 
+		EQUAL=18, N_EQUAL=19, GT_EQUAL=20, LT_EQUAL=21, GT=22, LT=23, AND=24, 
+		OR=25, NOT=26, OPEN_ROUND_BRACKET=27, CLOSED_ROUND_BRACKET=28, BOOL=29, 
+		ID=30, NUMBER=31, WS=32, ErrorChar=33, SINGLE_LINE_COMMENT=34, MULTI_LINE_COMMENT=35;
 	public static final int
 		RULE_program = 0, RULE_statement = 1, RULE_binaryLogicalOperator = 2, 
-		RULE_unaryLogicalOperator = 3, RULE_comparisonOperator = 4, RULE_expression = 5, 
-		RULE_assign = 6, RULE_input = 7, RULE_print = 8, RULE_add = 9, RULE_sub = 10, 
-		RULE_mul = 11, RULE_div = 12, RULE_doPartialStatement = 13, RULE_whileStatement = 14;
+		RULE_unaryLogicalOperator = 3, RULE_comparisonOperator = 4, RULE_openRoundBracket = 5, 
+		RULE_closedRoundBracket = 6, RULE_expression = 7, RULE_conditionalExpression = 8, 
+		RULE_define = 9, RULE_assign = 10, RULE_input = 11, RULE_print = 12, RULE_add = 13, 
+		RULE_sub = 14, RULE_mul = 15, RULE_div = 16, RULE_doPartialStatement = 17, 
+		RULE_conditionalPartialStatement = 18, RULE_conditionalBodyPartial = 19, 
+		RULE_whileStatement = 20, RULE_elseIfPartialStatement = 21, RULE_elsePartialStatement = 22, 
+		RULE_ifStatement = 23;
 	public static final String[] ruleNames = {
 		"program", "statement", "binaryLogicalOperator", "unaryLogicalOperator", 
-		"comparisonOperator", "expression", "assign", "input", "print", "add", 
-		"sub", "mul", "div", "doPartialStatement", "whileStatement"
+		"comparisonOperator", "openRoundBracket", "closedRoundBracket", "expression", 
+		"conditionalExpression", "define", "assign", "input", "print", "add", 
+		"sub", "mul", "div", "doPartialStatement", "conditionalPartialStatement", 
+		"conditionalBodyPartial", "whileStatement", "elseIfPartialStatement", 
+		"elsePartialStatement", "ifStatement"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'('", "')'", "'input'", "'print'", "'begin'", "'end'", "'while'", 
-		"'if'", "'then'", "'else'", "'elif'", "'let'", "'be'", "'to'", "'do'", 
-		"'add'", "'sub'", "'mul'", "'div'", "'is'", null, "'gte'", "'lte'", "'gt'", 
-		"'lt'", "'and'", "'or'"
+		null, "'begin'", "'end'", "'input'", "'print'", "'while'", "'if'", "'then'", 
+		"'else'", "'elif'", "'let'", "'be'", "'to'", "'do'", "'add'", "'sub'", 
+		"'mul'", "'div'", "'eq'", "'neq'", "'gte'", "'lte'", "'gt'", "'lt'", "'and'", 
+		"'or'", "'not'", "'('", "')'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, null, "BEGIN", "END", "WHILE", "IF", "THEN", "ELSE", 
-		"ELIF", "VARIABLE", "DEFINE", "TO", "DO", "ADD", "SUB", "MUL", "DIV", 
+		null, "BEGIN", "END", "INPUT", "PRINT", "WHILE", "IF", "THEN", "ELSE", 
+		"ELIF", "VARIABLE", "ASSIGN", "TO", "DO", "ADD", "SUB", "MUL", "DIV", 
 		"EQUAL", "N_EQUAL", "GT_EQUAL", "LT_EQUAL", "GT", "LT", "AND", "OR", "NOT", 
-		"BOOL", "ID", "NUMBER", "WS", "ErrorChar"
+		"OPEN_ROUND_BRACKET", "CLOSED_ROUND_BRACKET", "BOOL", "ID", "NUMBER", 
+		"WS", "ErrorChar", "SINGLE_LINE_COMMENT", "MULTI_LINE_COMMENT"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -77,7 +93,7 @@ public class swlParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "swl.g4"; }
+	public String getGrammarFileName() { return "swlParser.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -114,23 +130,23 @@ public class swlParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(30);
+			setState(48);
 			match(BEGIN);
-			setState(32); 
+			setState(50); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(31);
+				setState(49);
 				statement();
 				}
 				}
-				setState(34); 
+				setState(52); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << WHILE) | (1L << VARIABLE) | (1L << ADD) | (1L << SUB) | (1L << MUL) | (1L << DIV))) != 0) );
-			setState(36);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INPUT) | (1L << PRINT) | (1L << WHILE) | (1L << IF) | (1L << VARIABLE) | (1L << ADD) | (1L << SUB) | (1L << MUL) | (1L << DIV) | (1L << ID))) != 0) );
+			setState(54);
 			match(END);
 			}
 		}
@@ -146,6 +162,9 @@ public class swlParser extends Parser {
 	}
 
 	public static class StatementContext extends ParserRuleContext {
+		public DefineContext define() {
+			return getRuleContext(DefineContext.class,0);
+		}
 		public AssignContext assign() {
 			return getRuleContext(AssignContext.class,0);
 		}
@@ -170,6 +189,9 @@ public class swlParser extends Parser {
 		public WhileStatementContext whileStatement() {
 			return getRuleContext(WhileStatementContext.class,0);
 		}
+		public IfStatementContext ifStatement() {
+			return getRuleContext(IfStatementContext.class,0);
+		}
 		public StatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -180,63 +202,77 @@ public class swlParser extends Parser {
 		StatementContext _localctx = new StatementContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_statement);
 		try {
-			setState(46);
+			setState(66);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case VARIABLE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(38);
+				setState(56);
+				define();
+				}
+				break;
+			case ID:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(57);
 				assign();
 				}
 				break;
 			case ADD:
-				enterOuterAlt(_localctx, 2);
+				enterOuterAlt(_localctx, 3);
 				{
-				setState(39);
+				setState(58);
 				add();
 				}
 				break;
 			case SUB:
-				enterOuterAlt(_localctx, 3);
+				enterOuterAlt(_localctx, 4);
 				{
-				setState(40);
+				setState(59);
 				sub();
 				}
 				break;
 			case MUL:
-				enterOuterAlt(_localctx, 4);
+				enterOuterAlt(_localctx, 5);
 				{
-				setState(41);
+				setState(60);
 				mul();
 				}
 				break;
 			case DIV:
-				enterOuterAlt(_localctx, 5);
+				enterOuterAlt(_localctx, 6);
 				{
-				setState(42);
+				setState(61);
 				div();
 				}
 				break;
-			case T__3:
-				enterOuterAlt(_localctx, 6);
+			case PRINT:
+				enterOuterAlt(_localctx, 7);
 				{
-				setState(43);
+				setState(62);
 				print();
 				}
 				break;
-			case T__2:
-				enterOuterAlt(_localctx, 7);
+			case INPUT:
+				enterOuterAlt(_localctx, 8);
 				{
-				setState(44);
+				setState(63);
 				input();
 				}
 				break;
 			case WHILE:
-				enterOuterAlt(_localctx, 8);
+				enterOuterAlt(_localctx, 9);
 				{
-				setState(45);
+				setState(64);
 				whileStatement();
+				}
+				break;
+			case IF:
+				enterOuterAlt(_localctx, 10);
+				{
+				setState(65);
+				ifStatement();
 				}
 				break;
 			default:
@@ -270,7 +306,7 @@ public class swlParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(48);
+			setState(68);
 			_la = _input.LA(1);
 			if ( !(_la==AND || _la==OR) ) {
 			_errHandler.recoverInline(this);
@@ -307,7 +343,7 @@ public class swlParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50);
+			setState(70);
 			match(NOT);
 			}
 		}
@@ -342,7 +378,7 @@ public class swlParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(52);
+			setState(72);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQUAL) | (1L << N_EQUAL) | (1L << GT_EQUAL) | (1L << LT_EQUAL) | (1L << GT) | (1L << LT))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -365,12 +401,76 @@ public class swlParser extends Parser {
 		return _localctx;
 	}
 
+	public static class OpenRoundBracketContext extends ParserRuleContext {
+		public TerminalNode OPEN_ROUND_BRACKET() { return getToken(swlParser.OPEN_ROUND_BRACKET, 0); }
+		public OpenRoundBracketContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_openRoundBracket; }
+	}
+
+	public final OpenRoundBracketContext openRoundBracket() throws RecognitionException {
+		OpenRoundBracketContext _localctx = new OpenRoundBracketContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_openRoundBracket);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(74);
+			match(OPEN_ROUND_BRACKET);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ClosedRoundBracketContext extends ParserRuleContext {
+		public TerminalNode CLOSED_ROUND_BRACKET() { return getToken(swlParser.CLOSED_ROUND_BRACKET, 0); }
+		public ClosedRoundBracketContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_closedRoundBracket; }
+	}
+
+	public final ClosedRoundBracketContext closedRoundBracket() throws RecognitionException {
+		ClosedRoundBracketContext _localctx = new ClosedRoundBracketContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_closedRoundBracket);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(76);
+			match(CLOSED_ROUND_BRACKET);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static class ExpressionContext extends ParserRuleContext {
+		public OpenRoundBracketContext openRoundBracket() {
+			return getRuleContext(OpenRoundBracketContext.class,0);
+		}
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
+		}
+		public ClosedRoundBracketContext closedRoundBracket() {
+			return getRuleContext(ClosedRoundBracketContext.class,0);
 		}
 		public List<UnaryLogicalOperatorContext> unaryLogicalOperator() {
 			return getRuleContexts(UnaryLogicalOperatorContext.class);
@@ -402,55 +502,56 @@ public class swlParser extends Parser {
 		int _parentState = getState();
 		ExpressionContext _localctx = new ExpressionContext(_ctx, _parentState);
 		ExpressionContext _prevctx = _localctx;
-		int _startState = 10;
-		enterRecursionRule(_localctx, 10, RULE_expression, _p);
+		int _startState = 14;
+		enterRecursionRule(_localctx, 14, RULE_expression, _p);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(68);
+			setState(92);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__0:
+			case NOT:
+			case OPEN_ROUND_BRACKET:
 				{
-				setState(55);
-				match(T__0);
-				setState(59);
+				setState(82);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==NOT) {
 					{
 					{
-					setState(56);
+					setState(79);
 					unaryLogicalOperator();
 					}
 					}
-					setState(61);
+					setState(84);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(62);
+				setState(85);
+				openRoundBracket();
+				setState(86);
 				expression(0);
-				setState(63);
-				match(T__1);
+				setState(87);
+				closedRoundBracket();
 				}
 				break;
 			case ID:
 				{
-				setState(65);
+				setState(89);
 				match(ID);
 				}
 				break;
 			case NUMBER:
 				{
-				setState(66);
+				setState(90);
 				match(NUMBER);
 				}
 				break;
 			case BOOL:
 				{
-				setState(67);
+				setState(91);
 				match(BOOL);
 				}
 				break;
@@ -458,7 +559,7 @@ public class swlParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(79);
+			setState(103);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -469,9 +570,9 @@ public class swlParser extends Parser {
 					{
 					_localctx = new ExpressionContext(_parentctx, _parentState);
 					pushNewRecursionContext(_localctx, _startState, RULE_expression);
-					setState(70);
+					setState(94);
 					if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-					setState(73);
+					setState(97);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
 					case EQUAL:
@@ -481,26 +582,26 @@ public class swlParser extends Parser {
 					case GT:
 					case LT:
 						{
-						setState(71);
+						setState(95);
 						comparisonOperator();
 						}
 						break;
 					case AND:
 					case OR:
 						{
-						setState(72);
+						setState(96);
 						binaryLogicalOperator();
 						}
 						break;
 					default:
 						throw new NoViableAltException(this);
 					}
-					setState(75);
+					setState(99);
 					expression(5);
 					}
 					} 
 				}
-				setState(81);
+				setState(105);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			}
@@ -517,13 +618,93 @@ public class swlParser extends Parser {
 		return _localctx;
 	}
 
-	public static class AssignContext extends ParserRuleContext {
+	public static class ConditionalExpressionContext extends ParserRuleContext {
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public ConditionalExpressionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_conditionalExpression; }
+	}
+
+	public final ConditionalExpressionContext conditionalExpression() throws RecognitionException {
+		ConditionalExpressionContext _localctx = new ConditionalExpressionContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_conditionalExpression);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(106);
+			expression(0);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class DefineContext extends ParserRuleContext {
 		public TerminalNode VARIABLE() { return getToken(swlParser.VARIABLE, 0); }
 		public List<TerminalNode> ID() { return getTokens(swlParser.ID); }
 		public TerminalNode ID(int i) {
 			return getToken(swlParser.ID, i);
 		}
-		public TerminalNode DEFINE() { return getToken(swlParser.DEFINE, 0); }
+		public TerminalNode ASSIGN() { return getToken(swlParser.ASSIGN, 0); }
+		public TerminalNode NUMBER() { return getToken(swlParser.NUMBER, 0); }
+		public DefineContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_define; }
+	}
+
+	public final DefineContext define() throws RecognitionException {
+		DefineContext _localctx = new DefineContext(_ctx, getState());
+		enterRule(_localctx, 18, RULE_define);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(108);
+			match(VARIABLE);
+			setState(109);
+			match(ID);
+			setState(110);
+			match(ASSIGN);
+			setState(111);
+			_la = _input.LA(1);
+			if ( !(_la==ID || _la==NUMBER) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class AssignContext extends ParserRuleContext {
+		public List<TerminalNode> ID() { return getTokens(swlParser.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(swlParser.ID, i);
+		}
+		public TerminalNode ASSIGN() { return getToken(swlParser.ASSIGN, 0); }
 		public TerminalNode NUMBER() { return getToken(swlParser.NUMBER, 0); }
 		public AssignContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -533,18 +714,16 @@ public class swlParser extends Parser {
 
 	public final AssignContext assign() throws RecognitionException {
 		AssignContext _localctx = new AssignContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_assign);
+		enterRule(_localctx, 20, RULE_assign);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(82);
-			match(VARIABLE);
-			setState(83);
+			setState(113);
 			match(ID);
-			setState(84);
-			match(DEFINE);
-			setState(85);
+			setState(114);
+			match(ASSIGN);
+			setState(115);
 			_la = _input.LA(1);
 			if ( !(_la==ID || _la==NUMBER) ) {
 			_errHandler.recoverInline(this);
@@ -568,6 +747,7 @@ public class swlParser extends Parser {
 	}
 
 	public static class InputContext extends ParserRuleContext {
+		public TerminalNode INPUT() { return getToken(swlParser.INPUT, 0); }
 		public TerminalNode ID() { return getToken(swlParser.ID, 0); }
 		public InputContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -577,13 +757,13 @@ public class swlParser extends Parser {
 
 	public final InputContext input() throws RecognitionException {
 		InputContext _localctx = new InputContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_input);
+		enterRule(_localctx, 22, RULE_input);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(87);
-			match(T__2);
-			setState(88);
+			setState(117);
+			match(INPUT);
+			setState(118);
 			match(ID);
 			}
 		}
@@ -599,6 +779,7 @@ public class swlParser extends Parser {
 	}
 
 	public static class PrintContext extends ParserRuleContext {
+		public TerminalNode PRINT() { return getToken(swlParser.PRINT, 0); }
 		public TerminalNode NUMBER() { return getToken(swlParser.NUMBER, 0); }
 		public TerminalNode ID() { return getToken(swlParser.ID, 0); }
 		public PrintContext(ParserRuleContext parent, int invokingState) {
@@ -609,14 +790,14 @@ public class swlParser extends Parser {
 
 	public final PrintContext print() throws RecognitionException {
 		PrintContext _localctx = new PrintContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_print);
+		enterRule(_localctx, 24, RULE_print);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(90);
-			match(T__3);
-			setState(91);
+			setState(120);
+			match(PRINT);
+			setState(121);
 			_la = _input.LA(1);
 			if ( !(_la==ID || _la==NUMBER) ) {
 			_errHandler.recoverInline(this);
@@ -655,14 +836,14 @@ public class swlParser extends Parser {
 
 	public final AddContext add() throws RecognitionException {
 		AddContext _localctx = new AddContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_add);
+		enterRule(_localctx, 26, RULE_add);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(93);
+			setState(123);
 			match(ADD);
-			setState(94);
+			setState(124);
 			_la = _input.LA(1);
 			if ( !(_la==ID || _la==NUMBER) ) {
 			_errHandler.recoverInline(this);
@@ -672,9 +853,9 @@ public class swlParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(95);
+			setState(125);
 			match(TO);
-			setState(96);
+			setState(126);
 			match(ID);
 			}
 		}
@@ -705,14 +886,14 @@ public class swlParser extends Parser {
 
 	public final SubContext sub() throws RecognitionException {
 		SubContext _localctx = new SubContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_sub);
+		enterRule(_localctx, 28, RULE_sub);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(98);
+			setState(128);
 			match(SUB);
-			setState(99);
+			setState(129);
 			_la = _input.LA(1);
 			if ( !(_la==ID || _la==NUMBER) ) {
 			_errHandler.recoverInline(this);
@@ -722,9 +903,9 @@ public class swlParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(100);
+			setState(130);
 			match(TO);
-			setState(101);
+			setState(131);
 			match(ID);
 			}
 		}
@@ -755,14 +936,14 @@ public class swlParser extends Parser {
 
 	public final MulContext mul() throws RecognitionException {
 		MulContext _localctx = new MulContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_mul);
+		enterRule(_localctx, 30, RULE_mul);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(103);
+			setState(133);
 			match(MUL);
-			setState(104);
+			setState(134);
 			_la = _input.LA(1);
 			if ( !(_la==ID || _la==NUMBER) ) {
 			_errHandler.recoverInline(this);
@@ -772,9 +953,9 @@ public class swlParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(105);
+			setState(135);
 			match(TO);
-			setState(106);
+			setState(136);
 			match(ID);
 			}
 		}
@@ -805,14 +986,14 @@ public class swlParser extends Parser {
 
 	public final DivContext div() throws RecognitionException {
 		DivContext _localctx = new DivContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_div);
+		enterRule(_localctx, 32, RULE_div);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(108);
+			setState(138);
 			match(DIV);
-			setState(109);
+			setState(139);
 			_la = _input.LA(1);
 			if ( !(_la==ID || _la==NUMBER) ) {
 			_errHandler.recoverInline(this);
@@ -822,9 +1003,9 @@ public class swlParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(110);
+			setState(140);
 			match(TO);
-			setState(111);
+			setState(141);
 			match(ID);
 			}
 		}
@@ -849,12 +1030,100 @@ public class swlParser extends Parser {
 
 	public final DoPartialStatementContext doPartialStatement() throws RecognitionException {
 		DoPartialStatementContext _localctx = new DoPartialStatementContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_doPartialStatement);
+		enterRule(_localctx, 34, RULE_doPartialStatement);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(113);
+			setState(143);
 			match(DO);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ConditionalPartialStatementContext extends ParserRuleContext {
+		public DoPartialStatementContext doPartialStatement() {
+			return getRuleContext(DoPartialStatementContext.class,0);
+		}
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
+		}
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
+		}
+		public ConditionalPartialStatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_conditionalPartialStatement; }
+	}
+
+	public final ConditionalPartialStatementContext conditionalPartialStatement() throws RecognitionException {
+		ConditionalPartialStatementContext _localctx = new ConditionalPartialStatementContext(_ctx, getState());
+		enterRule(_localctx, 36, RULE_conditionalPartialStatement);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(145);
+			doPartialStatement();
+			setState(147); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(146);
+				statement();
+				}
+				}
+				setState(149); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INPUT) | (1L << PRINT) | (1L << WHILE) | (1L << IF) | (1L << VARIABLE) | (1L << ADD) | (1L << SUB) | (1L << MUL) | (1L << DIV) | (1L << ID))) != 0) );
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ConditionalBodyPartialContext extends ParserRuleContext {
+		public ConditionalExpressionContext conditionalExpression() {
+			return getRuleContext(ConditionalExpressionContext.class,0);
+		}
+		public ConditionalPartialStatementContext conditionalPartialStatement() {
+			return getRuleContext(ConditionalPartialStatementContext.class,0);
+		}
+		public ConditionalBodyPartialContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_conditionalBodyPartial; }
+	}
+
+	public final ConditionalBodyPartialContext conditionalBodyPartial() throws RecognitionException {
+		ConditionalBodyPartialContext _localctx = new ConditionalBodyPartialContext(_ctx, getState());
+		enterRule(_localctx, 38, RULE_conditionalBodyPartial);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(151);
+			conditionalExpression();
+			setState(152);
+			conditionalPartialStatement();
 			}
 		}
 		catch (RecognitionException re) {
@@ -870,19 +1139,10 @@ public class swlParser extends Parser {
 
 	public static class WhileStatementContext extends ParserRuleContext {
 		public TerminalNode WHILE() { return getToken(swlParser.WHILE, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
-		public DoPartialStatementContext doPartialStatement() {
-			return getRuleContext(DoPartialStatementContext.class,0);
+		public ConditionalBodyPartialContext conditionalBodyPartial() {
+			return getRuleContext(ConditionalBodyPartialContext.class,0);
 		}
 		public TerminalNode END() { return getToken(swlParser.END, 0); }
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
-		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
-		}
 		public WhileStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -891,32 +1151,154 @@ public class swlParser extends Parser {
 
 	public final WhileStatementContext whileStatement() throws RecognitionException {
 		WhileStatementContext _localctx = new WhileStatementContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_whileStatement);
+		enterRule(_localctx, 40, RULE_whileStatement);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(154);
+			match(WHILE);
+			setState(155);
+			conditionalBodyPartial();
+			setState(156);
+			match(END);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ElseIfPartialStatementContext extends ParserRuleContext {
+		public TerminalNode ELIF() { return getToken(swlParser.ELIF, 0); }
+		public ConditionalBodyPartialContext conditionalBodyPartial() {
+			return getRuleContext(ConditionalBodyPartialContext.class,0);
+		}
+		public ElseIfPartialStatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_elseIfPartialStatement; }
+	}
+
+	public final ElseIfPartialStatementContext elseIfPartialStatement() throws RecognitionException {
+		ElseIfPartialStatementContext _localctx = new ElseIfPartialStatementContext(_ctx, getState());
+		enterRule(_localctx, 42, RULE_elseIfPartialStatement);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(158);
+			match(ELIF);
+			setState(159);
+			conditionalBodyPartial();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ElsePartialStatementContext extends ParserRuleContext {
+		public TerminalNode ELSE() { return getToken(swlParser.ELSE, 0); }
+		public ConditionalPartialStatementContext conditionalPartialStatement() {
+			return getRuleContext(ConditionalPartialStatementContext.class,0);
+		}
+		public ElsePartialStatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_elsePartialStatement; }
+	}
+
+	public final ElsePartialStatementContext elsePartialStatement() throws RecognitionException {
+		ElsePartialStatementContext _localctx = new ElsePartialStatementContext(_ctx, getState());
+		enterRule(_localctx, 44, RULE_elsePartialStatement);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(161);
+			match(ELSE);
+			setState(162);
+			conditionalPartialStatement();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class IfStatementContext extends ParserRuleContext {
+		public TerminalNode IF() { return getToken(swlParser.IF, 0); }
+		public ConditionalBodyPartialContext conditionalBodyPartial() {
+			return getRuleContext(ConditionalBodyPartialContext.class,0);
+		}
+		public TerminalNode END() { return getToken(swlParser.END, 0); }
+		public List<ElseIfPartialStatementContext> elseIfPartialStatement() {
+			return getRuleContexts(ElseIfPartialStatementContext.class);
+		}
+		public ElseIfPartialStatementContext elseIfPartialStatement(int i) {
+			return getRuleContext(ElseIfPartialStatementContext.class,i);
+		}
+		public ElsePartialStatementContext elsePartialStatement() {
+			return getRuleContext(ElsePartialStatementContext.class,0);
+		}
+		public IfStatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_ifStatement; }
+	}
+
+	public final IfStatementContext ifStatement() throws RecognitionException {
+		IfStatementContext _localctx = new IfStatementContext(_ctx, getState());
+		enterRule(_localctx, 46, RULE_ifStatement);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(115);
-			match(WHILE);
-			setState(116);
-			expression(0);
-			setState(117);
-			doPartialStatement();
-			setState(119); 
+			setState(164);
+			match(IF);
+			setState(165);
+			conditionalBodyPartial();
+			setState(169);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			do {
+			while (_la==ELIF) {
 				{
 				{
-				setState(118);
-				statement();
+				setState(166);
+				elseIfPartialStatement();
 				}
 				}
-				setState(121); 
+				setState(171);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << WHILE) | (1L << VARIABLE) | (1L << ADD) | (1L << SUB) | (1L << MUL) | (1L << DIV))) != 0) );
-			setState(123);
+			}
+			setState(173);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==ELSE) {
+				{
+				setState(172);
+				elsePartialStatement();
+				}
+			}
+
+			setState(175);
 			match(END);
 			}
 		}
@@ -933,7 +1315,7 @@ public class swlParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 5:
+		case 7:
 			return expression_sempred((ExpressionContext)_localctx, predIndex);
 		}
 		return true;
@@ -947,37 +1329,55 @@ public class swlParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3#\u0080\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3%\u00b4\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
-		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\3\2\3\2\6\2#\n\2\r\2"+
-		"\16\2$\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\61\n\3\3\4\3\4\3\5"+
-		"\3\5\3\6\3\6\3\7\3\7\3\7\7\7<\n\7\f\7\16\7?\13\7\3\7\3\7\3\7\3\7\3\7\3"+
-		"\7\5\7G\n\7\3\7\3\7\3\7\5\7L\n\7\3\7\3\7\7\7P\n\7\f\7\16\7S\13\7\3\b\3"+
-		"\b\3\b\3\b\3\b\3\t\3\t\3\t\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\f\3"+
-		"\f\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3\16\3\16\3\16\3\16\3\16\3\17\3\17"+
-		"\3\20\3\20\3\20\3\20\6\20z\n\20\r\20\16\20{\3\20\3\20\3\20\2\3\f\21\2"+
-		"\4\6\b\n\f\16\20\22\24\26\30\32\34\36\2\5\3\2\34\35\3\2\26\33\3\2 !\2"+
-		"\177\2 \3\2\2\2\4\60\3\2\2\2\6\62\3\2\2\2\b\64\3\2\2\2\n\66\3\2\2\2\f"+
-		"F\3\2\2\2\16T\3\2\2\2\20Y\3\2\2\2\22\\\3\2\2\2\24_\3\2\2\2\26d\3\2\2\2"+
-		"\30i\3\2\2\2\32n\3\2\2\2\34s\3\2\2\2\36u\3\2\2\2 \"\7\7\2\2!#\5\4\3\2"+
-		"\"!\3\2\2\2#$\3\2\2\2$\"\3\2\2\2$%\3\2\2\2%&\3\2\2\2&\'\7\b\2\2\'\3\3"+
-		"\2\2\2(\61\5\16\b\2)\61\5\24\13\2*\61\5\26\f\2+\61\5\30\r\2,\61\5\32\16"+
-		"\2-\61\5\22\n\2.\61\5\20\t\2/\61\5\36\20\2\60(\3\2\2\2\60)\3\2\2\2\60"+
-		"*\3\2\2\2\60+\3\2\2\2\60,\3\2\2\2\60-\3\2\2\2\60.\3\2\2\2\60/\3\2\2\2"+
-		"\61\5\3\2\2\2\62\63\t\2\2\2\63\7\3\2\2\2\64\65\7\36\2\2\65\t\3\2\2\2\66"+
-		"\67\t\3\2\2\67\13\3\2\2\289\b\7\1\29=\7\3\2\2:<\5\b\5\2;:\3\2\2\2<?\3"+
-		"\2\2\2=;\3\2\2\2=>\3\2\2\2>@\3\2\2\2?=\3\2\2\2@A\5\f\7\2AB\7\4\2\2BG\3"+
-		"\2\2\2CG\7 \2\2DG\7!\2\2EG\7\37\2\2F8\3\2\2\2FC\3\2\2\2FD\3\2\2\2FE\3"+
-		"\2\2\2GQ\3\2\2\2HK\f\6\2\2IL\5\n\6\2JL\5\6\4\2KI\3\2\2\2KJ\3\2\2\2LM\3"+
-		"\2\2\2MN\5\f\7\7NP\3\2\2\2OH\3\2\2\2PS\3\2\2\2QO\3\2\2\2QR\3\2\2\2R\r"+
-		"\3\2\2\2SQ\3\2\2\2TU\7\16\2\2UV\7 \2\2VW\7\17\2\2WX\t\4\2\2X\17\3\2\2"+
-		"\2YZ\7\5\2\2Z[\7 \2\2[\21\3\2\2\2\\]\7\6\2\2]^\t\4\2\2^\23\3\2\2\2_`\7"+
-		"\22\2\2`a\t\4\2\2ab\7\20\2\2bc\7 \2\2c\25\3\2\2\2de\7\23\2\2ef\t\4\2\2"+
-		"fg\7\20\2\2gh\7 \2\2h\27\3\2\2\2ij\7\24\2\2jk\t\4\2\2kl\7\20\2\2lm\7 "+
-		"\2\2m\31\3\2\2\2no\7\25\2\2op\t\4\2\2pq\7\20\2\2qr\7 \2\2r\33\3\2\2\2"+
-		"st\7\21\2\2t\35\3\2\2\2uv\7\t\2\2vw\5\f\7\2wy\5\34\17\2xz\5\4\3\2yx\3"+
-		"\2\2\2z{\3\2\2\2{y\3\2\2\2{|\3\2\2\2|}\3\2\2\2}~\7\b\2\2~\37\3\2\2\2\t"+
-		"$\60=FKQ{";
+		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
+		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
+		"\3\2\3\2\6\2\65\n\2\r\2\16\2\66\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
+		"\3\3\3\3\3\5\3E\n\3\3\4\3\4\3\5\3\5\3\6\3\6\3\7\3\7\3\b\3\b\3\t\3\t\7"+
+		"\tS\n\t\f\t\16\tV\13\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\5\t_\n\t\3\t\3\t\3"+
+		"\t\5\td\n\t\3\t\3\t\7\th\n\t\f\t\16\tk\13\t\3\n\3\n\3\13\3\13\3\13\3\13"+
+		"\3\13\3\f\3\f\3\f\3\f\3\r\3\r\3\r\3\16\3\16\3\16\3\17\3\17\3\17\3\17\3"+
+		"\17\3\20\3\20\3\20\3\20\3\20\3\21\3\21\3\21\3\21\3\21\3\22\3\22\3\22\3"+
+		"\22\3\22\3\23\3\23\3\24\3\24\6\24\u0096\n\24\r\24\16\24\u0097\3\25\3\25"+
+		"\3\25\3\26\3\26\3\26\3\26\3\27\3\27\3\27\3\30\3\30\3\30\3\31\3\31\3\31"+
+		"\7\31\u00aa\n\31\f\31\16\31\u00ad\13\31\3\31\5\31\u00b0\n\31\3\31\3\31"+
+		"\3\31\2\3\20\32\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\2\5"+
+		"\3\2\32\33\3\2\24\31\3\2 !\2\u00ae\2\62\3\2\2\2\4D\3\2\2\2\6F\3\2\2\2"+
+		"\bH\3\2\2\2\nJ\3\2\2\2\fL\3\2\2\2\16N\3\2\2\2\20^\3\2\2\2\22l\3\2\2\2"+
+		"\24n\3\2\2\2\26s\3\2\2\2\30w\3\2\2\2\32z\3\2\2\2\34}\3\2\2\2\36\u0082"+
+		"\3\2\2\2 \u0087\3\2\2\2\"\u008c\3\2\2\2$\u0091\3\2\2\2&\u0093\3\2\2\2"+
+		"(\u0099\3\2\2\2*\u009c\3\2\2\2,\u00a0\3\2\2\2.\u00a3\3\2\2\2\60\u00a6"+
+		"\3\2\2\2\62\64\7\3\2\2\63\65\5\4\3\2\64\63\3\2\2\2\65\66\3\2\2\2\66\64"+
+		"\3\2\2\2\66\67\3\2\2\2\678\3\2\2\289\7\4\2\29\3\3\2\2\2:E\5\24\13\2;E"+
+		"\5\26\f\2<E\5\34\17\2=E\5\36\20\2>E\5 \21\2?E\5\"\22\2@E\5\32\16\2AE\5"+
+		"\30\r\2BE\5*\26\2CE\5\60\31\2D:\3\2\2\2D;\3\2\2\2D<\3\2\2\2D=\3\2\2\2"+
+		"D>\3\2\2\2D?\3\2\2\2D@\3\2\2\2DA\3\2\2\2DB\3\2\2\2DC\3\2\2\2E\5\3\2\2"+
+		"\2FG\t\2\2\2G\7\3\2\2\2HI\7\34\2\2I\t\3\2\2\2JK\t\3\2\2K\13\3\2\2\2LM"+
+		"\7\35\2\2M\r\3\2\2\2NO\7\36\2\2O\17\3\2\2\2PT\b\t\1\2QS\5\b\5\2RQ\3\2"+
+		"\2\2SV\3\2\2\2TR\3\2\2\2TU\3\2\2\2UW\3\2\2\2VT\3\2\2\2WX\5\f\7\2XY\5\20"+
+		"\t\2YZ\5\16\b\2Z_\3\2\2\2[_\7 \2\2\\_\7!\2\2]_\7\37\2\2^P\3\2\2\2^[\3"+
+		"\2\2\2^\\\3\2\2\2^]\3\2\2\2_i\3\2\2\2`c\f\6\2\2ad\5\n\6\2bd\5\6\4\2ca"+
+		"\3\2\2\2cb\3\2\2\2de\3\2\2\2ef\5\20\t\7fh\3\2\2\2g`\3\2\2\2hk\3\2\2\2"+
+		"ig\3\2\2\2ij\3\2\2\2j\21\3\2\2\2ki\3\2\2\2lm\5\20\t\2m\23\3\2\2\2no\7"+
+		"\f\2\2op\7 \2\2pq\7\r\2\2qr\t\4\2\2r\25\3\2\2\2st\7 \2\2tu\7\r\2\2uv\t"+
+		"\4\2\2v\27\3\2\2\2wx\7\5\2\2xy\7 \2\2y\31\3\2\2\2z{\7\6\2\2{|\t\4\2\2"+
+		"|\33\3\2\2\2}~\7\20\2\2~\177\t\4\2\2\177\u0080\7\16\2\2\u0080\u0081\7"+
+		" \2\2\u0081\35\3\2\2\2\u0082\u0083\7\21\2\2\u0083\u0084\t\4\2\2\u0084"+
+		"\u0085\7\16\2\2\u0085\u0086\7 \2\2\u0086\37\3\2\2\2\u0087\u0088\7\22\2"+
+		"\2\u0088\u0089\t\4\2\2\u0089\u008a\7\16\2\2\u008a\u008b\7 \2\2\u008b!"+
+		"\3\2\2\2\u008c\u008d\7\23\2\2\u008d\u008e\t\4\2\2\u008e\u008f\7\16\2\2"+
+		"\u008f\u0090\7 \2\2\u0090#\3\2\2\2\u0091\u0092\7\17\2\2\u0092%\3\2\2\2"+
+		"\u0093\u0095\5$\23\2\u0094\u0096\5\4\3\2\u0095\u0094\3\2\2\2\u0096\u0097"+
+		"\3\2\2\2\u0097\u0095\3\2\2\2\u0097\u0098\3\2\2\2\u0098\'\3\2\2\2\u0099"+
+		"\u009a\5\22\n\2\u009a\u009b\5&\24\2\u009b)\3\2\2\2\u009c\u009d\7\7\2\2"+
+		"\u009d\u009e\5(\25\2\u009e\u009f\7\4\2\2\u009f+\3\2\2\2\u00a0\u00a1\7"+
+		"\13\2\2\u00a1\u00a2\5(\25\2\u00a2-\3\2\2\2\u00a3\u00a4\7\n\2\2\u00a4\u00a5"+
+		"\5&\24\2\u00a5/\3\2\2\2\u00a6\u00a7\7\b\2\2\u00a7\u00ab\5(\25\2\u00a8"+
+		"\u00aa\5,\27\2\u00a9\u00a8\3\2\2\2\u00aa\u00ad\3\2\2\2\u00ab\u00a9\3\2"+
+		"\2\2\u00ab\u00ac\3\2\2\2\u00ac\u00af\3\2\2\2\u00ad\u00ab\3\2\2\2\u00ae"+
+		"\u00b0\5.\30\2\u00af\u00ae\3\2\2\2\u00af\u00b0\3\2\2\2\u00b0\u00b1\3\2"+
+		"\2\2\u00b1\u00b2\7\4\2\2\u00b2\61\3\2\2\2\13\66DT^ci\u0097\u00ab\u00af";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

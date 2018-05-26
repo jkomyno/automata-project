@@ -15,7 +15,7 @@ void MyListener::exitProgram(swlParser::ProgramContext *ctx) {
     cout << "}" << endl;
 }
 
-void MyListener::exitAssign(swlParser::AssignContext *ctx) {
+void MyListener::exitDefine(swlParser::DefineContext *ctx) {
     string name = ctx->ID(0)->getText();
     string val;
     if(ctx->ID().size() > 1) {
@@ -24,6 +24,17 @@ void MyListener::exitAssign(swlParser::AssignContext *ctx) {
         val = ctx->NUMBER()->getText();
     }
     cout << string(indent, ' ') << "int " << name << " = " << val << ";" << endl;
+}
+
+void MyListener::exitAssign(swlParser::AssignContext *ctx) {
+    string name = ctx->ID(0)->getText();
+    string val;
+    if(ctx->ID().size() > 1) {
+        val = ctx->ID(1)->getText();
+    } else {
+        val = ctx->NUMBER()->getText();
+    }
+    cout << string(indent, ' ') << name << " = " << val << ";" << endl;
 }
 
 void MyListener::exitInput(swlParser::InputContext *ctx) {
@@ -90,8 +101,16 @@ void MyListener::enterExpression(swlParser::ExpressionContext *ctx) {
     cout << val;    
 }
 
+void MyListener::enterConditionalExpression(swlParser::ConditionalExpressionContext *ctx) {
+    cout << "(";
+}
+
+void MyListener::exitConditionalExpression(swlParser::ConditionalExpressionContext *ctx) {
+    cout << ")";
+}
+
 void MyListener::enterWhileStatement(swlParser::WhileStatementContext *ctx) {
-    cout << string(indent, ' ') << "while (";
+    cout << string(indent, ' ') << "while ";
 }
 
 void MyListener::exitWhileStatement(swlParser::WhileStatementContext *ctx) {
@@ -100,8 +119,39 @@ void MyListener::exitWhileStatement(swlParser::WhileStatementContext *ctx) {
 }
 
 void MyListener::exitDoPartialStatement(swlParser::DoPartialStatementContext *ctx) {
-    cout << ") {" << endl;
+    cout << " {" << endl;
     indent += indentIncrement;
+}
+
+void MyListener::enterIfStatement(swlParser::IfStatementContext *ctx) {
+    cout << string(indent, ' ') << "if ";
+}
+
+void MyListener::exitIfStatement(swlParser::IfStatementContext *ctx) {
+    indent -= indentIncrement;
+    cout << string(indent, ' ') << "}" << endl;
+}
+
+void MyListener::enterElseIfPartialStatement(swlParser::ElseIfPartialStatementContext *ctx) {
+    indent -= indentIncrement;
+    cout << string(indent, ' ') << "} else if ";
+}
+
+void MyListener::enterElsePartialStatement(swlParser::ElsePartialStatementContext *ctx) {
+    indent -= indentIncrement;
+    cout << string(indent, ' ') << "} else ";
+}
+
+void MyListener::exitElsePartialStatement(swlParser::ElsePartialStatementContext *ctx) {
+
+}
+
+void MyListener::enterOpenRoundBracket(swlParser::OpenRoundBracketContext *ctx) {
+    cout << "(";
+}
+
+void MyListener::enterClosedRoundBracket(swlParser::ClosedRoundBracketContext *ctx) {
+    cout << ")";
 }
 
 void MyListener::exitAdd(swlParser::AddContext *ctx) {
