@@ -41,7 +41,11 @@ NOT: 'not';
 OPEN_ROUND_BRACKET: '(';
 CLOSED_ROUND_BRACKET: ')';
 
-BOOL : 'true' | 'false';
+// literals
+fragment CHAR : . ; // matches every single character
+STRING : '"' CHAR* '"' ;
+BOOL : 'true' | 'false' ;
+
 ID        : [a-z]+ ;
 NUMBER    : [0-9]+ ;
 WS        : [ \n\t]+ -> skip;

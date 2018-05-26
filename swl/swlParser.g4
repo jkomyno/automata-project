@@ -48,7 +48,7 @@ conditionalExpression : expression ;
 define    : VARIABLE ID ASSIGN (NUMBER | ID) ;
 assign    : ID ASSIGN (NUMBER | ID) ;
 input     : INPUT ID ;
-print     : PRINT (NUMBER | ID) ;
+print     : PRINT (NUMBER | ID | STRING) ;
 add       : ADD (NUMBER | ID) TO ID ;
 sub       : SUB (NUMBER | ID) TO ID ;
 mul       : MUL (NUMBER | ID) TO ID ;

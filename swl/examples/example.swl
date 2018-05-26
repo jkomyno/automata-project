@@ -3,7 +3,7 @@ begin
     let b be 10
     add 3 to b
     add b to a
-    add a to b
+    div a to b
     print b
     print 3
     sub 5 to b

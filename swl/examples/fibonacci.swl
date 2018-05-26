@@ -3,8 +3,8 @@ begin
     input n
     if n eq 0 do
         print 0
-    elif n lte -1 do
-        print "ERROR"
+    elif n lt 0 do
+        print "ERROR: n must be a positive number"
     else do
         let prev be 0
         let curr be 1

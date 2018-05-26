@@ -49,8 +49,12 @@ void MyListener::exitPrint(swlParser::PrintContext *ctx) {
     string val;
     if(ctx->ID() != NULL) {
         val = ctx->ID()->getText();
-    } else {
+    } else if (ctx->NUMBER() != NULL) {
         val = ctx->NUMBER()->getText();
+    } else if (ctx->CHAR() != NULL) {
+        val = ctx->CHAR()->getText();
+    } else {
+        val = ctx->STRING()->getText();
     }
     cout << string(indent, ' ') << "cout << " << val << " << endl;" << endl;    
 }
