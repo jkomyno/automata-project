@@ -6,4 +6,22 @@ begin
     add a to b
     print b
     print 3
+    sub 5 to b
+    mul 7 to a
+    print b
+    print a
+    while false do
+        let c be 10
+    end
+    while 5 do
+        let c be 10
+    end
+    let d be 0
+    input d
+    while (NOT 5) do
+        let c be 5
+    end
+    while (true and 1) do
+        let c be 5
+    end
 end

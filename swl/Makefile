@@ -18,6 +18,12 @@ ANTLRS=swlBaseListener.h \
         swlLexer.interp \
         swlListener.h \
         swl.tokens
+GRAMMAR=swl.g4
+
+all: cleanall grammar syncheck translate
+
+grammar:
+	antlr4 -Dlanguage=Cpp $(GRAMMAR)
 
 syncheck: $(SCOBJS) $(OBJS) $(DEPS)
 	$(CXX) -o syncheck $(SCOBJS) $(OBJS) $(LDFLAGS)
@@ -34,3 +40,4 @@ clean:
 distclean:
 	rm -f $(ANTLRS)
 
+cleanall: clean distclean
