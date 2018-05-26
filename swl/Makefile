@@ -21,7 +21,7 @@ ANTLRS=swlParserBaseListener.h \
 GRAMMAR_LEXER=swlLexer.g4
 GRAMMAR_PARSER=swlParser.g4
 
-all: cleanall grammar syncheck translate
+all: | cleanall grammar syncheck translate
 
 setup:
 	source ../setup.sh

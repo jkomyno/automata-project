@@ -51,8 +51,6 @@ void MyListener::exitPrint(swlParser::PrintContext *ctx) {
         val = ctx->ID()->getText();
     } else if (ctx->NUMBER() != NULL) {
         val = ctx->NUMBER()->getText();
-    } else if (ctx->CHAR() != NULL) {
-        val = ctx->CHAR()->getText();
     } else {
         val = ctx->STRING()->getText();
     }
