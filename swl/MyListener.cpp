@@ -16,23 +16,23 @@ void MyListener::exitProgram(swlParser::ProgramContext *ctx) {
 }
 
 void MyListener::exitDefine(swlParser::DefineContext *ctx) {
-    string name = ctx->ID(0)->getText();
+    string name = ctx->ID()->getText();
     string val;
-    if(ctx->ID().size() > 1) {
-        val = ctx->ID(1)->getText();
+    if (ctx->numberOrIdPartial()->ID()) {
+        val = ctx->numberOrIdPartial()->ID()->getText();
     } else {
-        val = ctx->NUMBER()->getText();
+        val = ctx->numberOrIdPartial()->NUMBER()->getText();
     }
     cout << string(indent, ' ') << "int " << name << " = " << val << ";" << endl;
 }
 
 void MyListener::exitAssign(swlParser::AssignContext *ctx) {
-    string name = ctx->ID(0)->getText();
+    string name = ctx->ID()->getText();
     string val;
-    if(ctx->ID().size() > 1) {
-        val = ctx->ID(1)->getText();
+    if (ctx->numberOrIdPartial()->ID()) {
+        val = ctx->numberOrIdPartial()->ID()->getText();
     } else {
-        val = ctx->NUMBER()->getText();
+        val = ctx->numberOrIdPartial()->NUMBER()->getText();
     }
     cout << string(indent, ' ') << name << " = " << val << ";" << endl;
 }
@@ -46,15 +46,11 @@ void MyListener::exitInput(swlParser::InputContext *ctx) {
 }
 
 void MyListener::exitPrint(swlParser::PrintContext *ctx) {
-    string val;
-    if(ctx->ID() != NULL) {
-        val = ctx->ID()->getText();
-    } else if (ctx->NUMBER() != NULL) {
-        val = ctx->NUMBER()->getText();
-    } else {
-        val = ctx->STRING()->getText();
+    cout << string(indent, ' ') << "cout << " << parsePrintArg(ctx);
+    for (auto it : ctx->printVariadic()) {
+        cout << " << " << parsePrintArg(it);
     }
-    cout << string(indent, ' ') << "cout << " << val << " << endl;" << endl;    
+    cout << " << " << "endl;" << endl;  
 }
 
 void MyListener::enterBinaryLogicalOperator(swlParser::BinaryLogicalOperatorContext *ctx) {
@@ -148,6 +144,60 @@ void MyListener::exitElsePartialStatement(swlParser::ElsePartialStatementContext
 
 }
 
+string MyListener::parseForDeclarationAndReturnID(swlParser::ForDeclarationContext *ctx) {
+    string idStr = ctx->ID()->getText();
+    cout << string(indent, ' ') << "for (int " << idStr << " = ";
+    return idStr;
+}
+
+void MyListener::parseRange(swlParser::RangeContext *ctx, const string& idStr) {
+    string firstVal;
+    string secondVal;
+    int numbersCount = 0;
+    if (ctx->numberOrIdPartial(0)->ID()) {
+        firstVal = ctx->numberOrIdPartial(0)->ID()->getText();
+    } else if (ctx->numberOrIdPartial(0)->NUMBER()) {
+        firstVal = ctx->numberOrIdPartial(0)->NUMBER()->getText();
+        numbersCount++;
+    }
+    if (ctx->numberOrIdPartial(1)->ID()) {
+        secondVal = ctx->numberOrIdPartial(1)->ID()->getText();
+    } else if (ctx->numberOrIdPartial(1)->NUMBER()) {
+        secondVal = ctx->numberOrIdPartial(1)->NUMBER()->getText();
+        numbersCount++;
+    }
+
+    bool lte = true; // <=
+    if (numbersCount == 2) {
+        int firstValN = stoi(firstVal);
+        int secondValN = stoi(secondVal);
+        
+        if (firstValN > secondValN) {
+            lte = false;
+        }
+    }
+
+    string comparisonOp = lte ? "<=" : ">=";
+    string incrementOp = lte ? "+=" : "-=";
+    cout << firstVal << "; " << idStr << " " << comparisonOp << " " << secondVal << "; " << idStr << " " << incrementOp << " ";
+    if (ctx->rangeIncrementPartial()) {
+        cout << ctx->rangeIncrementPartial()->NUMBER()->getText();
+    } else {
+        cout << "1"; // default step
+    }
+    cout << ")";
+}
+
+void MyListener::enterForRangeStatement(swlParser::ForRangeStatementContext *ctx) {
+    string idStr = parseForDeclarationAndReturnID(ctx->forDeclaration());
+    parseRange(ctx->range(), idStr);
+}
+
+void MyListener::exitForRangeStatement(swlParser::ForRangeStatementContext *ctx) {
+    indent -= indentIncrement;
+    cout << string(indent, ' ') << "}" << endl;
+}
+
 void MyListener::enterOpenRoundBracket(swlParser::OpenRoundBracketContext *ctx) {
     cout << "(";
 }
@@ -157,53 +207,17 @@ void MyListener::enterClosedRoundBracket(swlParser::ClosedRoundBracketContext *c
 }
 
 void MyListener::exitAdd(swlParser::AddContext *ctx) {
-    string name;
-    string val;
-    if(ctx->ID().size() > 1) {
-        name = ctx->ID(1)->getText();
-        val = ctx->ID(0)->getText();
-    } else {
-        name = ctx->ID(0)->getText();
-        val = ctx->NUMBER()->getText();
-    }
-    cout << string(indent, ' ') << name << " += " << val << ';' << endl;
+    parseMath(ctx, '+');
 }
 
 void MyListener::exitSub(swlParser::SubContext *ctx) {
-    string name;
-    string val;
-    if(ctx->ID().size() > 1) {
-        name = ctx->ID(1)->getText();
-        val = ctx->ID(0)->getText();
-    } else {
-        name = ctx->ID(0)->getText();
-        val = ctx->NUMBER()->getText();
-    }
-    cout << string(indent, ' ') << name << " -= " << val << ';' << endl;
+    parseMath(ctx, '-');
 }
 
 void MyListener::exitMul(swlParser::MulContext *ctx) {
-    string name;
-    string val;
-    if(ctx->ID().size() > 1) {
-        name = ctx->ID(1)->getText();
-        val = ctx->ID(0)->getText();
-    } else {
-        name = ctx->ID(0)->getText();
-        val = ctx->NUMBER()->getText();
-    }
-    cout << string(indent, ' ') << name << " *= " << val << ';' << endl;
+    parseMath(ctx, '*');
 }
 
 void MyListener::exitDiv(swlParser::DivContext *ctx) {
-    string name;
-    string val;
-    if(ctx->ID().size() > 1) {
-        name = ctx->ID(1)->getText();
-        val = ctx->ID(0)->getText();
-    } else {
-        name = ctx->ID(0)->getText();
-        val = ctx->NUMBER()->getText();
-    }
-    cout << string(indent, ' ') << name << " *= " << val << ';' << endl;
+    parseMath(ctx, '/');
 }

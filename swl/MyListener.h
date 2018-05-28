@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include "antlr4-runtime.h"
 #include "swlParser.h"
 #include "swlParserBaseListener.h"
@@ -12,6 +13,38 @@ class  MyListener : public swlParserBaseListener {
 private:
   int indent = 0;
   static const int indentIncrement = 4;
+
+  template <typename T>
+  void parseMath(T *ctx, char symbol) {
+    /**
+     * PRE: ctx is != NULL and one of AddContext, SubContext, MulContext, DivContext.
+     */
+    std::string name = ctx->ID()->getText();
+    std::string val;
+    if (ctx->numberOrIdPartial()->ID()) {
+        val = ctx->numberOrIdPartial()->ID()->getText();
+    } else {
+        val = ctx->numberOrIdPartial()->NUMBER()->getText();
+    }
+    std::cout << std::string(indent, ' ') << name << " " << symbol << "= " << val << ';' << std::endl;
+  }
+
+  template <typename T>
+  std::string parsePrintArg(T *tmpCtx) {
+    auto ctx = tmpCtx->printArg();
+    std::string val;
+    if (!ctx->numberOrIdPartial()) {
+      val = ctx->STRING()->getText();
+    } else if (ctx->numberOrIdPartial()->ID()) {
+      val = ctx->numberOrIdPartial()->ID()->getText();
+    } else if (ctx->numberOrIdPartial()->NUMBER()) {
+      val = ctx->numberOrIdPartial()->NUMBER()->getText();
+    }
+    return val;
+  }
+
+  std::string parseForDeclarationAndReturnID(swlParser::ForDeclarationContext *ctx);
+  void parseRange(swlParser::RangeContext *ctx, const std::string& idStr);
 
 public:
 
@@ -39,6 +72,9 @@ public:
   void enterElseIfPartialStatement(swlParser::ElseIfPartialStatementContext *ctx);
   void enterElsePartialStatement(swlParser::ElsePartialStatementContext *ctx);
   void exitElsePartialStatement(swlParser::ElsePartialStatementContext *ctx);
+
+  void enterForRangeStatement(swlParser::ForRangeStatementContext *ctx);
+  void exitForRangeStatement(swlParser::ForRangeStatementContext *ctx);
 
   void enterOpenRoundBracket(swlParser::OpenRoundBracketContext *ctx);
   void enterClosedRoundBracket(swlParser::ClosedRoundBracketContext *ctx);

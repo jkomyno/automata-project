@@ -16,7 +16,18 @@ options {
 
 program   : BEGIN statement+ END;
           
-statement : define | assign | add | sub | mul | div | print | input | whileStatement | ifStatement ;
+statement :
+    define
+  | assign
+  | add
+  | sub
+  | mul
+  | div
+  | print
+  | input
+  | whileStatement
+  | ifStatement
+  | forRangeStatement;
 
 binaryLogicalOperator : AND | OR ;
 
@@ -43,16 +54,21 @@ expression :
   | BOOL
   ;
 
+numberOrIdPartial : (NUMBER | ID) ;
+
 conditionalExpression : expression ;
 
-define    : VARIABLE ID ASSIGN (NUMBER | ID) ;
-assign    : ID ASSIGN (NUMBER | ID) ;
+printArg: STRING | numberOrIdPartial ;
+printVariadic : BASIC_SEPARATOR printArg ;
+
+define    : VARIABLE ID ASSIGN numberOrIdPartial ;
+assign    : ID ASSIGN numberOrIdPartial ;
 input     : INPUT ID ;
-print     : PRINT (NUMBER | ID | STRING) ;
-add       : ADD (NUMBER | ID) TO ID ;
-sub       : SUB (NUMBER | ID) TO ID ;
-mul       : MUL (NUMBER | ID) TO ID ;
-div       : DIV (NUMBER | ID) TO ID ;
+print     : PRINT printArg printVariadic*;
+add       : ADD numberOrIdPartial TO ID ;
+sub       : SUB numberOrIdPartial TO ID ;
+mul       : MUL numberOrIdPartial TO ID ;
+div       : DIV numberOrIdPartial TO ID ;
 
 doPartialStatement : DO ;
 
@@ -65,3 +81,9 @@ elseIfPartialStatement : ELIF conditionalBodyPartial ;
 elsePartialStatement : ELSE conditionalPartialStatement ;
 
 ifStatement : IF conditionalBodyPartial elseIfPartialStatement* elsePartialStatement? END ;
+
+rangeIncrementPartial : BASIC_SEPARATOR NUMBER;
+range : numberOrIdPartial RANGE numberOrIdPartial rangeIncrementPartial?;
+
+forDeclaration : FOR ID ASSIGN ;
+forRangeStatement : forDeclaration range conditionalPartialStatement END ;

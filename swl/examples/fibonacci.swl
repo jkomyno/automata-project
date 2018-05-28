@@ -1,20 +1,29 @@
 begin
     let n be 0
+    print "Please insert a number."
     input n
     if n eq 0 do
         print 0
     elif n lt 0 do
-        print "ERROR: n must be a positive number"
+        print "ERROR"
     else do
         let prev be 0
         let curr be 1
-        let i be 1
-        while i lt n do
+        #
+        # while i lt n do
+        #    let next be prev
+        #    add curr to next
+        #    prev be curr
+        #    curr be next
+        #    add 1 to i
+        # end
+        #
+        let startidx be 2
+        for i be startidx..n, 1 do
             let next be prev
             add curr to next
             prev be curr
             curr be next
-            add 1 to i
         end
         print curr
     end

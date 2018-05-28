@@ -13,16 +13,12 @@ IF: 'if';
 THEN: 'then';
 ELSE: 'else';
 ELIF: 'elif';
+FOR: 'for';
 VARIABLE: 'let';
 ASSIGN: 'be';
 TO: 'to';
 DO: 'do';
-
-// math operators
-ADD: 'add'; // +
-SUB: 'sub'; // +
-MUL: 'mul'; // *
-DIV: 'div'; // /
+BASIC_SEPARATOR: ',';
 
 // comparisons
 EQUAL: 'eq'; // ==
@@ -37,19 +33,29 @@ AND: 'and';
 OR: 'or';
 NOT: 'not';
 
+// math operators
+ADD: 'add'; // +
+SUB: 'sub'; // +
+MUL: 'mul'; // *
+DIV: 'div'; // /
+
+// conditional operators
+RANGE: '..';
+
 // parenthesis
 OPEN_ROUND_BRACKET: '(';
 CLOSED_ROUND_BRACKET: ')';
 
 // literals
-fragment CHAR : . ; // matches every single character
-STRING : '"' CHAR* '"' ;
+STRING : '"' (STR_ESCAPE | ~('\\'|'"'))* '"' ;
 BOOL : 'true' | 'false' ;
 
 ID        : [a-z]+ ;
 NUMBER    : [0-9]+ ;
-WS        : [ \n\t]+ -> skip;
+WS        : [ \n\r\t]+ -> skip;
 ErrorChar : . ;
 
 SINGLE_LINE_COMMENT : '#' .*? '\n' -> channel(COMMENTS) ;
 MULTI_LINE_COMMENT : '/*' .*? '*/' -> channel(COMMENTS) ;
+
+fragment STR_ESCAPE : '\\' '\r'? '\n' ;

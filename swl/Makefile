@@ -21,10 +21,16 @@ ANTLRS=swlParserBaseListener.h \
 GRAMMAR_LEXER=swlLexer.g4
 GRAMMAR_PARSER=swlParser.g4
 
+.PHONY: examples
+
 all: | cleanall grammar syncheck translate
 
 setup:
 	source ../setup.sh
+
+examples:
+	./translate ./examples/example.swl | $(CXX) -o ./examples/example -xc++ - && \
+	./translate ./examples/fibonacci.swl | $(CXX) -o ./examples/fibonacci -xc++ -
 
 grammar:
 	antlr4 -Dlanguage=Cpp $(GRAMMAR_LEXER) $(GRAMMAR_PARSER)
@@ -42,6 +48,6 @@ clean:
 	rm -f $(OBJS) $(TOBJS) $(SCOBJS) *.interp *.tokens syncheck translate
 
 distclean:
-	rm -f $(ANTLRS)
+	rm -f $(ANTLRS) examples/example examples/fibonacci
 
 cleanall: clean distclean

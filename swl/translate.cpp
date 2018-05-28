@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
     if(errors > 0) {
         cout << errors << " syntax errors found, aborting." << endl;
         return 1;
-    } 
+    }
     MyListener listener;
     tree::ParseTreeWalker::DEFAULT.walk(&listener, tree);
     return 0;
