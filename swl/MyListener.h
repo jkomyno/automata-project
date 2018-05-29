@@ -78,7 +78,7 @@ public:
 
   void enterOpenRoundBracket(swlParser::OpenRoundBracketContext *ctx);
   void enterClosedRoundBracket(swlParser::ClosedRoundBracketContext *ctx);
-
+	void enterDeclare(swlParser::DeclareContext *ctx);
   void exitAdd(swlParser::AddContext *ctx);
   void exitSub(swlParser::SubContext *ctx);
   void exitMul(swlParser::MulContext *ctx);

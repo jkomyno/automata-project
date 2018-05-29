@@ -17,7 +17,8 @@ options {
 program   : BEGIN statement+ END;
           
 statement :
-    define
+		 declare
+  |  define
   | assign
   | add
   | sub
@@ -61,6 +62,7 @@ conditionalExpression : expression ;
 printArg: STRING | numberOrIdPartial ;
 printVariadic : BASIC_SEPARATOR printArg ;
 
+declare		: DECLARE ID ;
 define    : VARIABLE ID ASSIGN numberOrIdPartial ;
 assign    : ID ASSIGN numberOrIdPartial ;
 input     : INPUT ID ;

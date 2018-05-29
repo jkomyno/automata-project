@@ -15,6 +15,7 @@ ELSE: 'else';
 ELIF: 'elif';
 FOR: 'for';
 VARIABLE: 'let';
+DECLARE: 'declare';
 ASSIGN: 'be';
 TO: 'to';
 DO: 'do';
