@@ -47,10 +47,11 @@ void MyListener::exitInput(swlParser::InputContext *ctx) {
 
 void MyListener::exitPrint(swlParser::PrintContext *ctx) {
     cout << string(indent, ' ') << "cout << " << parsePrintArg(ctx);
+		bool endline = false;
     for (auto it : ctx->printVariadic()) {
         cout << " << " << parsePrintArg(it);
     }
-    cout << " << " << "endl;" << endl;  
+    cout << ';' << endl;
 }
 
 void MyListener::enterBinaryLogicalOperator(swlParser::BinaryLogicalOperatorContext *ctx) {
@@ -168,15 +169,17 @@ void MyListener::parseRange(swlParser::RangeContext *ctx, const string& idStr) {
     }
 
     bool lte = true; // <=
-    if (numbersCount == 2) {
+    /*if (numbersCount == 2) {
         int firstValN = stoi(firstVal);
         int secondValN = stoi(secondVal);
         
         if (firstValN > secondValN) {
             lte = false;
         }
+    }*/
+    if (firstVal > secondVal) {
+        lte = false;
     }
-
     string comparisonOp = lte ? "<=" : ">=";
     string incrementOp = lte ? "+=" : "-=";
     cout << firstVal << "; " << idStr << " " << comparisonOp << " " << secondVal << "; " << idStr << " " << incrementOp << " ";

@@ -5,7 +5,7 @@ begin
     if n eq 0 do
         print 0
     elif n lt 0 do
-        print "ERROR"
+        print "ERROR", endl
     else do
         let prev be 0
         let curr be 1
@@ -25,6 +25,6 @@ begin
             prev be curr
             curr be next
         end
-        print "The ", n, "th Fibonaccis number is ", curr
+        print "The ", n, "th Fibonaccis number is ", curr, endl
     end
 end

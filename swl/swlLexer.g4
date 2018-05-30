@@ -8,6 +8,7 @@ BEGIN: 'begin';
 END: 'end';
 INPUT: 'input';
 PRINT: 'print';
+ENDL: 'endl' ;
 WHILE: 'while';
 IF: 'if';
 THEN: 'then';

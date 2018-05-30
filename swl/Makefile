@@ -30,7 +30,8 @@ setup:
 
 examples:
 	./translate ./examples/example.swl | $(CXX) -o ./examples/example -xc++ - && \
-	./translate ./examples/fibonacci.swl | $(CXX) -o ./examples/fibonacci -xc++ -
+	./translate ./examples/fibonacci.swl | $(CXX) -o ./examples/fibonacci -xc++ - && \
+  ./translate ./examples/christmasTree.swl | $(CXX) -o ./examples/christmasTree -xc++ -
 
 grammar:
 	antlr4 -Dlanguage=Cpp $(GRAMMAR_LEXER) $(GRAMMAR_PARSER)

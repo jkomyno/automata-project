@@ -1,0 +1,60 @@
+begin
+  let n be 0
+  while n lte 3 do
+    print "Please insert a positive integer greater than 3: "
+    input n
+  end
+  mul 2 to n
+  sub 3 to n
+  let b be n
+  add 3 to n
+  div 2 to n
+  sub 1 to b
+  let c be b
+  add 1 to b
+  div 2 to c
+  #tree topper cycle
+  for i be 1..c do
+    print " "
+  end
+  print "*", endl
+  #branches cycle
+  for i be 3..n do
+    for j be b..1 do
+      let g be j
+      sub c to g
+      let h be c
+      sub j to h
+      let k be i
+      sub 1 to k
+      if g gt 0 do 
+        if g gt i do
+          print  " "
+        else do
+          print "*"
+        end
+      elif h lt k do
+        print "*"
+      else do
+        print " "
+      end
+    end
+    print endl
+  end
+  #log cycle
+  for i be 1..c do
+    print " "
+  end
+  print "*", endl
+  
+  
+        
+          
+
+
+
+
+
+
+
+end

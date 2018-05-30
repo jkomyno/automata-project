@@ -59,14 +59,14 @@ numberOrIdPartial : (NUMBER | ID) ;
 
 conditionalExpression : expression ;
 
-printArg: STRING | numberOrIdPartial ;
+printArg: STRING | numberOrIdPartial | ENDL ;
 printVariadic : BASIC_SEPARATOR printArg ;
 
 declare		: DECLARE ID ;
 define    : VARIABLE ID ASSIGN numberOrIdPartial ;
 assign    : ID ASSIGN numberOrIdPartial ;
 input     : INPUT ID ;
-print     : PRINT printArg printVariadic*;
+print     : PRINT printArg printVariadic* ;
 add       : ADD numberOrIdPartial TO ID ;
 sub       : SUB numberOrIdPartial TO ID ;
 mul       : MUL numberOrIdPartial TO ID ;

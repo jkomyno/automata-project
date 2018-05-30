@@ -34,12 +34,15 @@ private:
     auto ctx = tmpCtx->printArg();
     std::string val;
     if (!ctx->numberOrIdPartial()) {
-      val = ctx->STRING()->getText();
+      if(ctx->STRING())
+        val = ctx->STRING()->getText();
+      else
+        val = "endl";
     } else if (ctx->numberOrIdPartial()->ID()) {
       val = ctx->numberOrIdPartial()->ID()->getText();
     } else if (ctx->numberOrIdPartial()->NUMBER()) {
       val = ctx->numberOrIdPartial()->NUMBER()->getText();
-    }
+    } 
     return val;
   }
 
