@@ -207,8 +207,8 @@ void MyListener::enterClosedRoundBracket(swlParser::ClosedRoundBracketContext *c
 }
 
 void MyListener::enterDeclare(swlParser::DeclareContext *ctx){
-		string name = ctx->ID()->getText();
-		cout << string(indent, ' ') << "int " << name << ';' << endl;
+    string name = ctx->ID()->getText();
+    cout << string(indent, ' ') << "int " << name << ';' << endl;
 }
 
 void MyListener::exitAdd(swlParser::AddContext *ctx) {

@@ -17,8 +17,8 @@ options {
 program   : BEGIN statement+ END;
           
 statement :
-		 declare
-  |  define
+    declare
+  | define
   | assign
   | add
   | sub
