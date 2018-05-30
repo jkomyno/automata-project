@@ -168,18 +168,16 @@ void MyListener::parseRange(swlParser::RangeContext *ctx, const string& idStr) {
         numbersCount++;
     }
 
-    bool lte = true; // <=
-    /*if (numbersCount == 2) {
+    bool lte = true;
+    if (numbersCount == 2) {
         int firstValN = stoi(firstVal);
         int secondValN = stoi(secondVal);
         
         if (firstValN > secondValN) {
             lte = false;
         }
-    }*/
-    if (firstVal > secondVal) {
-        lte = false;
     }
+    
     string comparisonOp = lte ? "<=" : ">=";
     string incrementOp = lte ? "+=" : "-=";
     cout << firstVal << "; " << idStr << " " << comparisonOp << " " << secondVal << "; " << idStr << " " << incrementOp << " ";

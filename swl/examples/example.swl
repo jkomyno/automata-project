@@ -1,6 +1,6 @@
 begin
-		declare o
-    let a be 5
+    declare a
+    a be 5
     let b be 10
     add 3 to b
     add b to a
@@ -10,14 +10,14 @@ begin
     sub 5 to b
     mul 7 to a
     print b
-    print a
+    print a, endl
     let d be 0
     while not(not(false)) do
         let c be 5
     end
     let c be 0
     while c lt 5 do
-        print c
+        print c, endl
         add 1 to c
     end
     # it should also support comments
@@ -26,12 +26,12 @@ begin
     elif true do
         let d be 1
     elif not (true) or (5 eq 5) do
-        print 4
+        print 4, endl
     else do
-        print 5
+        print 5, endl
     end
     # for in range loop
     for index be 0..10, 5 do
-        print "INDEX", index, index
+        print "INDEX", index, index, endl
     end
 end

@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 CXX=g++
 CXXFLAGS=-std=c++11 -I $(HOME)/antlr4/include
 LDFLAGS=-lantlr4-runtime -L $(HOME)/antlr4/lib
@@ -25,13 +26,19 @@ GRAMMAR_PARSER=swlParser.g4
 
 all: | cleanall grammar syncheck translate
 
+example:
+	./translate ./examples/example.swl | tee >($(CXX) -o ./examples/example -xc++ -)
+
+fibonacci:
+	./translate ./examples/fibonacci.swl | tee >($(CXX) -o ./examples/fibonacci -xc++ -)
+
+tree:
+	./translate ./examples/christmasTree.swl | tee >($(CXX) -o ./examples/christmasTree -xc++ -)
+
 setup:
 	source ../setup.sh
 
-examples:
-	./translate ./examples/example.swl | $(CXX) -o ./examples/example -xc++ - && \
-	./translate ./examples/fibonacci.swl | $(CXX) -o ./examples/fibonacci -xc++ - && \
-  ./translate ./examples/christmasTree.swl | $(CXX) -o ./examples/christmasTree -xc++ -
+examples: example fibonacci tree
 
 grammar:
 	antlr4 -Dlanguage=Cpp $(GRAMMAR_LEXER) $(GRAMMAR_PARSER)
@@ -49,6 +56,6 @@ clean:
 	rm -f $(OBJS) $(TOBJS) $(SCOBJS) *.interp *.tokens syncheck translate
 
 distclean:
-	rm -f $(ANTLRS) examples/example examples/fibonacci
+	rm -f $(ANTLRS) examples/example examples/fibonacci examples/christmasTree
 
 cleanall: clean distclean

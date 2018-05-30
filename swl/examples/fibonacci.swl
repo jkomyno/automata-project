@@ -1,6 +1,6 @@
 begin
     let n be 0
-    print "Please insert a number."
+    print "Please insert a number: "
     input n
     if n eq 0 do
         print 0
@@ -25,6 +25,6 @@ begin
             prev be curr
             curr be next
         end
-        print "The ", n, "th Fibonaccis number is ", curr, endl
+        print "The ", n, "th Fibonacci number is ", curr, endl
     end
 end
